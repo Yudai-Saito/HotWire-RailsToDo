@@ -7,4 +7,5 @@ down:
 
 exec:
 	docker compose exec app bash
+
 .PHONY: up down
