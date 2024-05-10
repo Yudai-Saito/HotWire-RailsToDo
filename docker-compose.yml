@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    environment:
+      - SECRET_KEY_BASE=your_new_secret_key_here
+    tty: true
