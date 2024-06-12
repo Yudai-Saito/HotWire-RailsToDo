@@ -5,9 +5,14 @@ class TodosController < ApplicationController
     render layout: false
   end
 
+  # todosコントローラーのcreateアクション
   def create
     session[:todos] << params[:todo]
-    redirect_to todos_path
+    index = session[:todos].index(params[:todo])
+    respond_to do |format|
+      format.html{ render turbo_stream: turbo_stream.append('todos', partial: 'todos/todo', locals: { todo: params[:todo], index: index}) }
+      format.turbo_stream { redirect_to todos_path }
+    end
   end
 
   def destroy
